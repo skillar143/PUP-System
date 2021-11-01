@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Option;
+use App\Models\User;
 use App\Models\Position;
 use Illuminate\Http\Request;
-use App\Models\Qualification;
+use Illuminate\Support\Facades\Auth;
 
-class QualificationController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,24 +16,18 @@ class QualificationController extends Controller
      */
     public function index()
     {
-        return view('admin.qualification.index');
+        $jobs = User::where('id','=',Auth::user()->id)->with('positions')->get();
+        return view('admin.position.positions', compact('jobs'));
     }
-
-    public function test()
-    {
-        return view('qualification.index');
-    }
-
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $position = Position::where('id','=',$id)->first();
-        return view('admin.qualification.create', compact('position'));
+        return view('admin.position.create');
     }
 
     /**
@@ -42,16 +36,15 @@ class QualificationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        Qualification::create([
-            'position_id' => $id,
-            'qualification' => $request->qualification,
-            'qualified' => $request->qualified,
-            'points' => $request->points
+        Position::create([
+            'user_id' => Auth::user()->id,
+            'job' => $request->job,
+            'description' => $request->description,
         ]);
 
-        return redirect()->back();
+        return redirect()->route('position.index');
     }
 
     /**

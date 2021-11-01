@@ -50,7 +50,7 @@ class RegistrationController extends Controller
 
         $latest = Registration::select('id')->latest()->first();
 
-        return redirect()->route('qualification.index', $latest->id);
+        return redirect()->route('guestQualification.index', $latest->id);
     }
 
     /**
@@ -97,7 +97,7 @@ class RegistrationController extends Controller
 
         $latest = Registration::select('id')->latest()->first();
 
-        return redirect()->route('qualification.index', $latest->id);
+        return redirect()->route('guestQualification.index', $latest->id);
     }
 
     /**

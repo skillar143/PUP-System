@@ -1,8 +1,8 @@
 @extends('welcome')
 
 @section('content')
-
-    <form class="w-50" action="{{ route('registration.update', $data->id) }}" method="POST">
+    <div class="container-fluid w-50 d-flex justify-content-center align-items-center">
+      <form class="w-50" action="{{ route('registration.update', $data->id) }}" method="POST">
         @method('PUT')
         @csrf
         <div class="form-group">
@@ -34,12 +34,14 @@
         </div>
         
         <div class="from-row">
+            <a onclick="document.getElementById('deleteFrm').submit()" class="btn btn-secondary">Back</a>
             <button type="submit" class="btn btn-primary">Next</button>
         </div>
-    </form>
-    <form action="{{ route('registration.destroy', $data->id) }}" method="POST" id="deleteFrm">
-      @method('DELETE')
-      @csrf
-      <button onclick="document.getElementById('deleteFrm').submit()" class="btn btn-sm btn-secondary">Back</button>
-    </form>
+      </form>
+      <form action="{{ route('registration.destroy', $data->id) }}" method="POST" id="deleteFrm">
+        @method('DELETE')
+        @csrf
+        {{-- <button onclick="document.getElementById('deleteFrm').submit()" class="btn btn-sm btn-secondary">Back</button> --}}
+      </form>
+    </div>
 @endsection
