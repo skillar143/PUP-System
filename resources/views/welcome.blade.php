@@ -21,8 +21,19 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Jobox
+                   <h1>Jobox</h1> 
                 </a>
+
+                <div class="d flex ml-5 justify-content-center align-items-center">
+                    <section class="ml-5 justify-content-center align-items-center  {{Route::currentRouteName() == 'registration.index' ? 'd-none' : ''}}" >
+                    <div class="rounded-cirlce bg-primary"> </div>
+                    <span class="border rounded-circle m-5 p-2 {{Route::currentRouteName() == 'registration.create' ? 'text-primary border-primary' : ''}}">Registration </span>
+                    <span class="border rounded-circle m-5 p-2 {{Route::currentRouteName() == 'guestQualification.index' ? 'text-primary border-primary' : ''}}">Job Offers</span>
+                    <span class="m-5">Validation</span>
+                    </section>
+                </div>
+                
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,7 +58,7 @@
             </div>
         </nav>
         
-        <main class="d-flex justify-content-center align-items-center p-5">
+        <main class="justify-content-center align-items-center p-5">
             @yield('content')
         </main>
 
