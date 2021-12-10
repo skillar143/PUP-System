@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\RegistrationController::class, 'index'])->name('registration.index');
-Route::get('/create/{id}', [App\Http\Controllers\RegistrationController::class, 'create'])->name('registration.create');
+Route::get('/create', [App\Http\Controllers\RegistrationController::class, 'create'])->name('registration.create');
 Route::post('/registration', [App\Http\Controllers\RegistrationController::class, 'store'])->name('registration.store');
 Route::get('/registration/edit/{id}', [App\Http\Controllers\RegistrationController::class, 'edit'])->name('registration.edit');
 Route::put('/registration/update/{id}', [App\Http\Controllers\RegistrationController::class, 'update'])->name('registration.update');
@@ -28,12 +28,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Postion
-Route::prefix('/position')->group(function() {
-    Route::get('/', [App\Http\Controllers\PositionController::class, 'index'])->name('position.index');
-    Route::get('/create', [App\Http\Controllers\PositionController::class, 'create'])->name('position.create');
-    Route::post('/post', [App\Http\Controllers\PositionController::class, 'store'])->name('position.store');
-});
+
 
 //Qualification
 Route::prefix('/qualification')->group(function() {
@@ -42,9 +37,4 @@ Route::prefix('/qualification')->group(function() {
     Route::post('/post/{id}', [App\Http\Controllers\QualificationController::class, 'store'])->name('qualification.store');
 });
 
-//Guest Qualification
-Route::prefix('/qualification/guest')->group(function() {
-    Route::get('/{id}', [App\Http\Controllers\GuestQualificationController::class, 'index'])->name('guestQualification.index');
-    Route::get('/create/{id}', [App\Http\Controllers\GuestQualificationController::class, 'create'])->name('guestQualification.create');
-    Route::post('/store/{id}', [App\Http\Controllers\GuestQualificationController::class, 'storeAnswer'])->name('guestQualification.store');
-});
+

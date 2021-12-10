@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Registration;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,13 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Registration::create([
-            'name' => 'Juan Dela Cruz',
-            'gender' => 'Male',
-            'dob' => '2000-01-01',
-            'email' => 'juan@juan.com',
-            'mobile_number' => '09186286277',
-            'nationality' => 'Filipino'
-        ]);
+     User::create([
+         'name' => 'admin',
+         'email' => 'Admin@test.com',
+         'password' => Hash::make('password')
+     ]);
+
     }
 }

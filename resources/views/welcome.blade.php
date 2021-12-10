@@ -18,45 +18,56 @@
     <body class="d-flex flex-column">
 
         <!-- As a heading -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand navbar-dark topbar mb-4 static-top shadow" style="background-color:maroon">
+            
+        
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                   <h1>Jobox</h1> 
-                </a>
-
-                <div class="d flex ml-5 justify-content-center align-items-center">
-                    <section class="ml-5 justify-content-center align-items-center  {{Route::currentRouteName() == 'registration.index' ? 'd-none' : ''}}" >
-                    <div class="rounded-cirlce bg-primary"> </div>
-                    <span class="border rounded-circle m-5 p-2 {{Route::currentRouteName() == 'registration.create' ? 'text-primary border-primary' : ''}}">Registration </span>
-                    <span class="border rounded-circle m-5 p-2 {{Route::currentRouteName() == 'guestQualification.index' ? 'text-primary border-primary' : ''}}">Job Offers</span>
-                    <span class="m-5">Validation</span>
-                    </section>
-                </div>
-                
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
+                <img class="img-profile rounded-circle " style="height:50px" src="{{asset('img/logo.png')}}">
+                    <div class="navbar-brand">
+                    
+                     <h3>PUP-Login</h3> 
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <h6>
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </h6> 
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        @else
+                           
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
-            </div>
-        </nav>
+                </div>
+            </nav>
+       
         
         <main class="justify-content-center align-items-center p-5">
             @yield('content')

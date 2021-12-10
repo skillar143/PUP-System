@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Position;
 use App\Models\Registration;
 use Illuminate\Http\Request;
 
@@ -14,10 +14,7 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        $registrations = Registration::all();
-        $latest = Registration::select('id')->latest()->first();
-        $nextId = $latest->id + 1;
-        return view('registration.index', compact('registrations'))->with('nextId', $nextId);
+       return view('registration.index');
     }
 
     /**
@@ -25,7 +22,7 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
 
         return view('registration.create');
@@ -48,9 +45,7 @@ class RegistrationController extends Controller
             'nationality' => $request->nationality,
         ]);
 
-        $latest = Registration::select('id')->latest()->first();
-
-        return redirect()->route('guestQualification.index', $latest->id);
+        return redirect()->route('guestQualification.index');
     }
 
     /**
