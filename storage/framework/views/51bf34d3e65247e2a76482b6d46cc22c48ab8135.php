@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\projects\job_application\resources\views/admin/qualification/index.blade.php ENDPATH**/ ?>
